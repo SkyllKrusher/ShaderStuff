@@ -6,6 +6,7 @@ public class BobMove : MonoBehaviour
 {
     public float distance = 0.5f;
     public float speed = 10f;
+    private int tick = 0;
 
     void FixedUpdate()
     {
@@ -15,8 +16,10 @@ public class BobMove : MonoBehaviour
     private void Bob()
     {
         Vector3 tempVector = transform.position;
-        tempVector.y = distance * Mathf.Sin(Time.frameCount * Time.fixedDeltaTime * speed);
-        Debug.Log(tempVector);
+        float perFrameMove = tick * Time.fixedDeltaTime;
+        tempVector.y = distance * Mathf.Sin(perFrameMove * speed / 100 * Mathf.Rad2Deg);
+        // Debug.Log(tempVector);
         transform.position = tempVector;
+        tick++;
     }
 }
